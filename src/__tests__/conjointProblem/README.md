@@ -110,8 +110,8 @@ Problem Statement: You are given a list of Exclusion Groups, you need to filter 
 
 // SAMPLE CASE(s)
 
-### Part 3
+### Part 3 (Count Valid Features)
 
-Problem Statement: You are given a list of features, and a list of exclusion groups, You need to calculate, the total number of valid products. If a product contains all the feature-value pairs defined in an Exclusion Group, it is considered invalid.
+Problem Statement: You are given a list of features, and a list of exclusion groups at-most (2), You need to calculate, the total number of valid products. If a product contains all the feature-value pairs defined in an Exclusion Group, it is considered invalid.
 
 // SAMPLE CASE(s)

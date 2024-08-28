@@ -1,4 +1,4 @@
-const filterRedundantExclusionGroups = require("../candidateSolutions/filterRedundantGroups");
+const filterRedundantExclusionGroups = require("../../../candidateSolutions/filterRedundantGroups");
 const {
   MOCK_EXCLUSION_GROUPS_0,
   MOCK_EXCLUSION_GROUPS_1,

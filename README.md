@@ -8,3 +8,5 @@ Difficulty of problem "getValidProductsCount" can be further increased to match 
 1. After installation, candidate needs to write function in "src/candidateSolutions/[problem]" files.
 
 2. "src/__tests__/conjointProblem/[problem]/[problem].spec.js" imports functions from these files, and tests them against pre-written test cases.
+
+3. "npm run test" to test all 3 files

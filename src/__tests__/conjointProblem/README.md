@@ -82,8 +82,25 @@ Valid Product Combinations
 
 Problem Statement: Assuming no exclusion groups, you are given a list of sample features, calculate the total number of product combinations possible for these features.
 
-//SAMPLE CASE(s)
+```
+SAMPLE CASE: 
+getTotalCombinations([
+  {
+    featureID: "feature1",
+    values: ["feat_1_val_1", "feat_1_val_2"],
+  },
+  {
+    featureID: "feature2",
+    values: ["feat_2_val_1", "feat_2_val_2", "feature_2_val_3"],
+  },
+  {
+    featureID: "feature3",
+    values: ["feat_3_val_1", "feat_3_val_2", "feat_3_val_3", "feat_3_val_4"],
+  },
+])
 
+Your function should return: 24 
+```
 
 ### Part 2 (Redundant Exclusion Groups)
 
@@ -106,12 +123,100 @@ Since ExclusionGroupA alone is sufficient to exclude these products, ExclusionGr
 
 ```
 
-Problem Statement: You are given a list of Exclusion Groups, you need to filter redundant exclusion groups. You may return the answer in any order. 
+Problem Statement: You are given a list of Exclusion Groups, you need to filter redundant exclusion groups. Return your result in the original order after filtering redundant groups.
 
-// SAMPLE CASE(s)
+```
+SAMPLE CASE:
+filterRedundantExclusionGroups({exclusionGroups:[
+    [
+        {
+            "featureID": "feature_0",
+            "value": "level_0_2"
+        },
+        {
+            "featureID": "feature_1",
+            "value": "level_1_1"
+        }
+    ],
+    [
+        {
+            "featureID": "feature_0",
+            "value": "level_0_2"
+        },
+        {
+            "featureID": "feature_3",
+            "value": "level_3_1"
+        }
+    ],
+    [
+        {
+            "featureID": "feature_0",
+            "value": "level_0_2"
+        },
+        {
+            "featureID": "feature_1",
+            "value": "level_1_1"
+        },
+        {
+            "featureID": "feature_3",
+            "value": "level_3_1"
+        }
+    ]
+]})
+
+should return: 
+[
+    [
+        {
+            "featureID": "feature_0",
+            "value": "level_0_2"
+        },
+        {
+            "featureID": "feature_1",
+            "value": "level_1_1"
+        }
+    ],
+    [
+        {
+            "featureID": "feature_0",
+            "value": "level_0_2"
+        },
+        {
+            "featureID": "feature_3",
+            "value": "level_3_1"
+        }
+    ]
+]
+
+```
 
 ### Part 3 (Count Valid Features)
 
 Problem Statement: You are given a list of features, and a list of exclusion groups at-most (2), You need to calculate, the total number of valid products. If a product contains all the feature-value pairs defined in an Exclusion Group, it is considered invalid.
 
-// SAMPLE CASE(s)
+```
+SAMPLE CASE:
+
+getValidProductsCount({
+        features: [
+          { featureID: "f1", values: ["l1-1", "l2-1", "l3-1", "l4-1", "l5-1"] },
+          {
+            featureID: "f2",
+            values: ["l1-2", "l2-2", "l3-2", "l4-2", "l5-2", "l6-2", "l7-2"],
+          },
+          {
+            featureID: "f3",
+            values: ["l1-3", "l1-4"],
+          },
+        ],
+        exclusionGroups: [
+          [
+            { featureID: "f1", value: "l1-1" },
+            { featureID: "f3", value: "l1-3" },
+          ],
+        ],
+      })
+
+should return 63
+
+```

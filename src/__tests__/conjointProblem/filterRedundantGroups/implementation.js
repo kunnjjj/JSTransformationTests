@@ -50,8 +50,8 @@ const getOverlappingGroupIdsWithCurrentGroup = ({ exclusionGroup, groups }) =>
     )
     .map((group) => group.id);
 
-const matchMainWebContract = ({ array }) =>
-  array.map((value, index) => ({
+const matchMainWebContract = ({ baseExclusionGroups }) =>
+  baseExclusionGroups.map((value, index) => ({
     id: index,
     value: value.map((item, itemIndex) => ({
       id: itemIndex,
@@ -69,7 +69,9 @@ const filterRedundantExclusionGroups = ({
   const necessaryGroupIds = new Set(),
     redundantGroupIds = new Set();
 
-  const exclusionGroups = matchMainWebContract({ array: baseExclusionGroups });
+  const exclusionGroups = matchMainWebContract({
+    baseExclusionGroups: baseExclusionGroups,
+  });
 
   const exclusionGroupsBySize = exclusionGroups.sort(
     exclusionGroupSizeComparator

@@ -1,4 +1,4 @@
-const getValidProductsCount = require("./implementation");
+const getValidProductsCount = require("../candidateSolutions/getValidProductsCount");
 
 describe("getValidProductsCount", () => {
   test("when any feature has zero levels, zero combinations are possible", () => {

@@ -1,4 +1,4 @@
-const getTotalCombinations = require("./implementation");
+const getTotalCombinations = require("../candidateSolutions/getTotalCombinations");
 const {
   MOCK_FEATURES_1,
   MOCK_FEATURES_2,

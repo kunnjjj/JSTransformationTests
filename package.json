@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test":"jest src/__tests__/conjointProblem/filterRedundantGroups/filterRedundantGroups.spec.js src/__tests__/conjointProblem/getTotalCombinations/getTotalCombinations.spec.js src/__tests__/conjointProblem/getValidProductsCount/getValidProductsCount.spec.js"
   },
   "author": "",
   "license": "ISC",

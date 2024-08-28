@@ -220,3 +220,22 @@ getValidProductsCount({
 should return 63
 
 ```
+
+## Constraints
+
+### Problem 1
+
+number of features <= 10
+values for each feature <= 10
+
+### Problem 2
+
+number of exclusion groups <= 1000
+
+### Problem 3
+
+number of features <= 10
+
+values for each feature <= 10
+
+number of exclusion groups <= 2

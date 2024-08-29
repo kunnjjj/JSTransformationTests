@@ -7,7 +7,7 @@ const {
 } = require("./__mocks__");
 
 describe("filterRedundantExclusionGroups", () => {
-  test("should return same groups if no overlap", () => {
+  test("test-1", () => {
     const result = filterRedundantExclusionGroups({
       exclusionGroups: MOCK_EXCLUSION_GROUPS_0,
     });
@@ -15,14 +15,14 @@ describe("filterRedundantExclusionGroups", () => {
     expect(result).toEqual(MOCK_EXCLUSION_GROUPS_0);
   });
 
-  test("should return same groups if there is partial overlap", () => {
+  test("test-2", () => {
     const result = filterRedundantExclusionGroups({
       exclusionGroups: MOCK_EXCLUSION_GROUPS_1,
     });
     expect(result).toEqual(MOCK_EXCLUSION_GROUPS_1);
   });
 
-  test("should filter redundant groups when overlapping groups present", () => {
+  test("test-3", () => {
     const result = filterRedundantExclusionGroups({
       exclusionGroups: MOCK_EXCLUSION_GROUPS_2,
     });

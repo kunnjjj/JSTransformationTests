@@ -13,15 +13,15 @@ const {
 } = require("./__mock__");
 
 describe("getTotalCombinations", () => {
-  test("test with 3 features, 2 values each", () => {
+  test("test-1", () => {
     expect(getTotalCombinations(MOCK_FEATURES_1)).toBe(MOCK_ANS_1);
   });
 
-  test("test2", () => {
+  test("test-2", () => {
     expect(getTotalCombinations(MOCK_FEATURES_2)).toBe(MOCK_ANS_2);
   });
 
-  test("test3", () => {
+  test("test-3", () => {
     expect(getTotalCombinations(MOCK_FEATURES_3)).toBe(MOCK_ANS_3);
   });
 

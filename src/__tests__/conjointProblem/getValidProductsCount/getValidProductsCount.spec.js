@@ -1,7 +1,7 @@
 const getValidProductsCount = require("../../../candidateSolutions/getValidProductsCount");
 
 describe("getValidProductsCount", () => {
-  test("when any feature has zero levels, zero combinations are possible", () => {
+  test("test-1", () => {
     expect(
       getValidProductsCount({
         features: [
@@ -20,7 +20,7 @@ describe("getValidProductsCount", () => {
     ).toEqual(0);
   });
 
-  test("when there are no exclusion groups, should return the count of all combinations", () => {
+  test("test-2", () => {
     expect(
       getValidProductsCount({
         features: [
@@ -39,7 +39,7 @@ describe("getValidProductsCount", () => {
     ).toEqual(70);
   });
 
-  test("when exclusion groups are present, all possible combinations as per exclusion groups should be removed from all combinations", () => {
+  test("test-3", () => {
     expect(
       getValidProductsCount({
         features: [
@@ -63,7 +63,7 @@ describe("getValidProductsCount", () => {
     ).toEqual(63);
   });
 
-  test("when multiple exclusion groups are present, extra combinations should not be removed from the total combinations", () => {
+  test("test-4", () => {
     expect(
       getValidProductsCount({
         features: [
@@ -91,7 +91,7 @@ describe("getValidProductsCount", () => {
     ).toEqual(59);
   });
 
-  test("overflow test for max possible use case", () => {
+  test("test-5", () => {
     const featureIDVsLevelIds = {
       f1: ["l1-1", "l2-1", "l3-1", "l4-1", "l5-1"],
       f2: ["l1-2", "l2-2", "l3-2", "l4-2", "l5-2"],

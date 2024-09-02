@@ -16,8 +16,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest src/__tests__/filterRedundantRules/filterRedundantRules.spec.js",
-    "eject": "react-scripts eject"
+    "main-tests": "jest src/__tests__/filterRedundantRules/filterRedundantRules.spec.js",
+    "sample-tests":"jest src/__tests__/filterRedundantRules/sampleTests.spec.js"
   },
   "eslintConfig": {
     "extends": [

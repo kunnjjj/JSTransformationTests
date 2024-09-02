@@ -37,7 +37,28 @@ const RESULT_2 = [
   ["condition3", "condition6"],
 ];
 
-// const MOCK_RE
+const SAMPLE_0 = [
+  ["condition1", "condition2"],
+  ["condition2", "condition3"],
+  ["condition1", "condition2", "condition4"],
+];
+
+const SAMPLE_RESULT_0 = [
+  ["condition1", "condition2"],
+  ["condition2", "condition3"],
+];
+
+const SAMPLE_1 = [
+  ["condition1", "condition2"],
+  ["condition2", "condition3"],
+  ["condition1", "condition3"],
+];
+
+const SAMPLE_RESULT_1 = [
+  ["condition1", "condition2"],
+  ["condition2", "condition3"],
+  ["condition1", "condition3"],
+];
 
 module.exports = {
   MOCK_RULES_0,
@@ -46,4 +67,8 @@ module.exports = {
   RESULT_0,
   RESULT_1,
   RESULT_2,
+  SAMPLE_0,
+  SAMPLE_1,
+  SAMPLE_RESULT_0,
+  SAMPLE_RESULT_1,
 };

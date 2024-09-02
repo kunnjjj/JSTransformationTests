@@ -1,3 +1,4 @@
+const _cloneDeep = require("lodash").cloneDeep;
 const filterRedundantRules = require("../../candidateSolutions/filterRedundantRules");
 const {
   MOCK_RULES_0,
@@ -37,9 +38,9 @@ describe("filterRedundantRules", () => {
     const clonedRules1 = [...MOCK_RULES_1];
     const clonedRules2 = [...MOCK_RULES_2];
 
-    const jsonValuesBefore0 = JSON.stringify(MOCK_RULES_0);
-    const jsonValuesBefore1 = JSON.stringify(MOCK_RULES_1);
-    const jsonValuesBefore2 = JSON.stringify(MOCK_RULES_2);
+    const deepClone0 = _cloneDeep(MOCK_RULES_0);
+    const deepClone1 = _cloneDeep(MOCK_RULES_1);
+    const deepClone2 = _cloneDeep(MOCK_RULES_2);
 
     filterRedundantRules({ rules: MOCK_RULES_0 });
     filterRedundantRules({ rules: MOCK_RULES_1 });
@@ -51,9 +52,9 @@ describe("filterRedundantRules", () => {
     expect(MOCK_RULES_2).toBe(referenceBefore2);
 
     // Input Values
-    expect(JSON.stringify(MOCK_RULES_0)).toBe(jsonValuesBefore0);
-    expect(JSON.stringify(MOCK_RULES_1)).toBe(jsonValuesBefore1);
-    expect(JSON.stringify(MOCK_RULES_2)).toBe(jsonValuesBefore2);
+    expect(MOCK_RULES_0).toEqual(deepClone0);
+    expect(MOCK_RULES_1).toEqual(deepClone1);
+    expect(MOCK_RULES_2).toEqual(deepClone2);
 
     // Individual Rules Reference(s)
     MOCK_RULES_0.forEach((_, index) => {
@@ -67,7 +68,7 @@ describe("filterRedundantRules", () => {
     });
 
     const result0 = filterRedundantRules({ rules: MOCK_RULES_0 });
-    expect(result0).toBe(RESULT_0);
+    expect(result0).toEqual(RESULT_0);
   });
 
   test("test-5", () => {

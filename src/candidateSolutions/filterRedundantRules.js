@@ -6,10 +6,8 @@
  *
  * @returns Array<{featureID:string, value:string}[]>
  */
-const filterRedundantExclusionGroups = ({
-  exclusionGroups: baseExclusionGroups,
-}) => {
+const filterRedundantGroups = ({ exclusionGroups: baseExclusionGroups }) => {
   // COMPLETE THIS FUNCTION
 };
 
-module.exports = filterRedundantExclusionGroups;
+module.exports = filterRedundantGroups;

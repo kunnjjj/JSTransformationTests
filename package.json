@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"jest src/__tests__/conjointProblem/filterRedundantGroups/filterRedundantGroups.spec.js src/__tests__/conjointProblem/getTotalCombinations/getTotalCombinations.spec.js src/__tests__/conjointProblem/getValidProductsCount/getValidProductsCount.spec.js"
+    "test":"jest src/__tests__/filterRedundantConditions/filterRedundantConditions.spec.js"
   },
   "author": "",
   "license": "ISC",

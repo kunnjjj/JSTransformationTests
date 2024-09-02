@@ -1,8 +1,10 @@
 # Filter Redundant Rules
 
-A product has a number of options based on some conditions, You have a list of rules. Each rule is a list of conditions. If all conditions of a rule are present in a product. It is `NOT` supported.
+You have a list of rules, where each rule consists of a set of conditions that determine if a product is `UNSUPPORTED`. A product is `UNSUPPORTED`
+if it meets all the conditions of any rule.
 
-Sometimes, one rule is fully covered by another rule that has more conditions. In such cases, the more detailed rule is unnecessary because the simpler rule already covers the same scenario.
+Sometimes, one rule is fully covered by another rule that has more conditions. In such cases, the more detailed rule is unnecessary because the simpler rule already handles the scenario.
+
 ```
 Example 
 
@@ -16,7 +18,7 @@ Since Rule_2 requires everything in Rule_1 plus an additional condition, any pro
 Hence Rule_2 is redundant.
 ```
 
-Your task is to remove these unnecessary rules and return the remaining rules in the original order.
+The task is to remove these redundant rules and return the remaining rules in their original order.
 
 ```
 Sample Case: 1

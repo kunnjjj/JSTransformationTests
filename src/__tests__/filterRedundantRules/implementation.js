@@ -1,109 +1,72 @@
-const EMPTY_ARRAY_READONLY = [];
+/**
+ * @param
+ * {
+ *  parentRule:{id:string, values:string[]}
+ *  childRule:{id:string, values:string[]}
+ * }
+ * @returns boolean
+ */
+const doesOverlap = ({ parentRule, childRule }) => {
+  const childRuleConditionsSet = new Set(childRule.values);
 
-const _keyBy = (array, keyName) =>
-  array.reduce((acc, item) => ({ ...acc, [item[keyName]]: item }), {});
-
-const _isEqual = (array1, array2) =>
-  array1.length === array2.length &&
-  array1.every((_, index) => array2[index] === array1[index]);
-
-const getOriginalContract = (exclusionGroupsResult) =>
-  exclusionGroupsResult.map(({ value }) =>
-    value.map((item) => ({
-      featureID: item.featureID,
-      value: item.levelIds[0],
-    }))
+  return parentRule.values.every((parentRuleCondition) =>
+    childRuleConditionsSet.has(parentRuleCondition)
   );
-
-const getExclusionGroupSize = (exclusionGroup) => exclusionGroup.value.length;
-
-const exclusionGroupSizeComparator = (groupA, groupB) =>
-  getExclusionGroupSize(groupA) - getExclusionGroupSize(groupB);
-
-const doExclusionGroupsOverlap = ({ groupA, groupB }) => {
-  let parentGroup = groupA,
-    childGroup = groupB;
-  if (getExclusionGroupSize(groupA) > getExclusionGroupSize(groupB)) {
-    [parentGroup, childGroup] = [groupB, groupA];
-  }
-
-  const exclusionGroupValuesByFeatureId = _keyBy(childGroup.value, "featureID");
-
-  return parentGroup.value.every(({ featureID: parentFeatureId, levelIds }) => {
-    const exclusionGroupValue =
-      exclusionGroupValuesByFeatureId[parentFeatureId];
-
-    return (
-      !!exclusionGroupValue &&
-      _isEqual(
-        [...(levelIds ?? EMPTY_ARRAY_READONLY)].sort(),
-        [...(exclusionGroupValue.levelIds ?? EMPTY_ARRAY_READONLY)].sort()
-      )
-    );
-  });
 };
-
-const getOverlappingGroupIdsWithCurrentGroup = ({ exclusionGroup, groups }) =>
-  groups
-    .filter((group) =>
-      doExclusionGroupsOverlap({ groupA: exclusionGroup, groupB: group })
-    )
-    .map((group) => group.id);
-
-const matchMainWebContract = ({ baseExclusionGroups }) =>
-  baseExclusionGroups.map((value, index) => ({
-    id: index,
-    value: value.map((item, itemIndex) => ({
-      id: itemIndex,
-      levelIds: [item.value],
-      featureID: item.featureID,
-    })),
-  }));
 
 /**
- * exclusionGroups:[{featureID:string,value:string}]
+ * @param
+ * {
+ *  rule: {id:string, values:string[]}
+ *  remainingRules:Array<{id:string,values:string[]}>
+ * }
+ * @returns string[]
  */
-const filterRedundantExclusionGroups = ({
-  exclusionGroups: baseExclusionGroups,
-}) => {
-  const necessaryGroupIds = new Set(),
-    redundantGroupIds = new Set();
+const getOverlappingIds = ({ rule: parentRule, remainingRules }) =>
+  remainingRules
+    .filter((childRule) => doesOverlap({ parentRule, childRule }))
+    .map((rule) => rule.id);
 
-  const exclusionGroups = matchMainWebContract({
-    baseExclusionGroups: baseExclusionGroups,
+/**
+ * @param
+ * {rules} Array<string[]>
+ * @returns Array<{id:string, values:string[]}>
+ */
+const addIdsToRules = ({ rules }) =>
+  rules.map((rule, index) => ({ id: index, values: rule }));
+
+/**
+ * Removes redundant rules from the list.
+ *
+ * @param {rules:Array<Array<string>>} rules - An array of rules, where each rule is an array of strings.
+ * @returns {Array<Array<string>>} - The filtered array of rules with redundant rules removed.
+ */
+const filterRedundantRules = ({ rules: baseRules }) => {
+  const rules = addIdsToRules({ rules: baseRules });
+
+  const necessaryRuleIds = new Set(),
+    redundantRuleIds = new Set();
+
+  const rulesBySize = [...rules].sort(
+    (ruleA, ruleB) => ruleA.values.length - ruleB.values.length
+  );
+
+  rulesBySize.forEach((rule, index) => {
+    if (redundantRuleIds.has(rule.id)) return;
+
+    necessaryRuleIds.add(rule.id);
+
+    const overlappingIdsWithRule = getOverlappingIds({
+      rule,
+      remainingRules: rulesBySize.slice(index),
+    });
+
+    overlappingIdsWithRule.forEach((ruleId) => redundantRuleIds.add(ruleId));
   });
 
-  const exclusionGroupsBySize = exclusionGroups.sort(
-    exclusionGroupSizeComparator
-  );
-
-  if (exclusionGroups.length && exclusionGroupsBySize[0].value.length < 2) {
-    return exclusionGroups; // handling this in validation, case should never exist
-  }
-
-  exclusionGroupsBySize.forEach((exclusionGroup, index) => {
-    if (redundantGroupIds.has(exclusionGroup.id)) return;
-
-    necessaryGroupIds.add(exclusionGroup.id);
-    const overlappingIdsWithCurrentGroup =
-      getOverlappingGroupIdsWithCurrentGroup({
-        exclusionGroup,
-        groups: exclusionGroups.slice(index + 1),
-      });
-
-    overlappingIdsWithCurrentGroup.forEach((groupId) =>
-      redundantGroupIds.add(groupId)
-    );
-  });
-
-  const exclusionGroupsResult = exclusionGroups.filter(({ id: groupId }) =>
-    necessaryGroupIds.has(groupId)
-  );
-  const exclusionGroupsWithCorrectContract = getOriginalContract(
-    exclusionGroupsResult
-  );
-
-  return exclusionGroupsWithCorrectContract;
+  return rules
+    .filter((rule) => necessaryRuleIds.has(rule.id))
+    .map((rule) => rule.values);
 };
 
-module.exports = filterRedundantExclusionGroups;
+module.exports = filterRedundantRules;

@@ -1,95 +1,49 @@
-const MOCK_FEATURE_0 = "feature_0";
-const MOCK_FEATURE_1 = "feature_1";
-const MOCK_FEATURE_2 = "feature_2";
-const MOCK_FEATURE_3 = "feature_3";
-
-const MOCK_LEVEL_0_IDS = ["level_0_0", "level_0_1", "level_0_2"];
-const MOCK_LEVEL_1_IDS = ["level_1_0", "level_1_1"];
-const MOCK_LEVEL_2_IDS = ["level_2_0"];
-const MOCK_LEVEL_3_IDS = ["level_3_0", "level_3_1"];
-
-const MOCK_EXCLUSION_GROUP_VALUES_0 = [
-  {
-    featureID: MOCK_FEATURE_0,
-    value: MOCK_LEVEL_0_IDS[2],
-  },
-  {
-    featureID: MOCK_FEATURE_1,
-    value: MOCK_LEVEL_1_IDS[1],
-  },
+// 1 removal + Ordering
+const MOCK_RULES_0 = [
+  ["condition3", "condition7", "condition4"],
+  ["condition3", "condition4"],
+  ["condition1", "condition2"],
 ];
 
-const MOCK_EXCLUSION_GROUP_VALUES_1 = [
-  {
-    featureID: MOCK_FEATURE_2,
-    value: MOCK_LEVEL_2_IDS[0],
-  },
-  {
-    featureID: MOCK_FEATURE_3,
-    value: MOCK_LEVEL_3_IDS[1],
-  },
+const RESULT_0 = [
+  ["condition3", "condition4"],
+  ["condition1", "condition2"],
 ];
 
-const MOCK_EXCLUSION_GROUP_VALUES_2 = [
-  // Partial Overlap with "MOCK_EXCLUSION_GROUP_VALUES_0"
-  {
-    featureID: MOCK_EXCLUSION_GROUP_VALUES_0[0].featureID,
-    value: MOCK_EXCLUSION_GROUP_VALUES_0[0].value,
-  },
-  {
-    featureID: MOCK_FEATURE_3,
-    value: MOCK_LEVEL_3_IDS[1],
-  },
+// No removal
+const MOCK_RULES_1 = [
+  ["condition1", "condition2", "condition3"],
+  ["condition4", "condition5"],
+  ["condition6", "condition1", "condition4"],
+  ["condition6", "condition3", "condition4"],
 ];
 
-const MOCK_EXCLUSION_GROUP_VALUES_3 = [
-  // Entire Overlap with "MOCK_EXCLUSION_GROUP_VALUES_0"
-  {
-    featureID: MOCK_EXCLUSION_GROUP_VALUES_0[0].featureID,
-    value: MOCK_EXCLUSION_GROUP_VALUES_0[0].value,
-  },
-  {
-    featureID: MOCK_EXCLUSION_GROUP_VALUES_0[1].featureID,
-    value: MOCK_EXCLUSION_GROUP_VALUES_0[1].value,
-  },
-  {
-    featureID: MOCK_FEATURE_3,
-    value: MOCK_LEVEL_3_IDS[1],
-  },
+const RESULT_1 = MOCK_RULES_1;
+
+// Multiple removals + Ordering
+const MOCK_RULES_2 = [
+  ["condition4", "condition5", "condition1"],
+  ["condition2", "condition3", "condition6"],
+  ["condition1", "condition2", "condition3"],
+  ["condition5", "condition1"],
+  ["condition9", "condition10", "condition11"],
+  ["condition3", "condition6"],
 ];
 
-const MOCK_EXCLUSION_GROUPS_0 = [
-  MOCK_EXCLUSION_GROUP_VALUES_0,
-  MOCK_EXCLUSION_GROUP_VALUES_1,
+const RESULT_2 = [
+  ["condition1", "condition2", "condition3"],
+  ["condition5", "condition1"],
+  ["condition9", "condition10", "condition11"],
+  ["condition3", "condition6"],
 ];
 
-const MOCK_EXCLUSION_GROUPS_1 = [
-  MOCK_EXCLUSION_GROUP_VALUES_0,
-  MOCK_EXCLUSION_GROUP_VALUES_2, // has partial overlap with MOCK_EXCLUSION_GROUP_VALUES_0
-];
-
-const MOCK_EXCLUSION_GROUPS_2 = [
-  MOCK_EXCLUSION_GROUP_VALUES_0,
-  MOCK_EXCLUSION_GROUP_VALUES_2,
-  MOCK_EXCLUSION_GROUP_VALUES_3,
-];
-
-const MOCK_EXCLUSION_GROUPS_2_RESULT = [
-  MOCK_EXCLUSION_GROUPS_2[0],
-  MOCK_EXCLUSION_GROUPS_2[1],
-];
+// const MOCK_RE
 
 module.exports = {
-  MOCK_FEATURE_0,
-  MOCK_FEATURE_1,
-  MOCK_FEATURE_2,
-  MOCK_FEATURE_3,
-  MOCK_LEVEL_0_IDS,
-  MOCK_LEVEL_1_IDS,
-  MOCK_LEVEL_2_IDS,
-  MOCK_LEVEL_3_IDS,
-  MOCK_EXCLUSION_GROUPS_0,
-  MOCK_EXCLUSION_GROUPS_1,
-  MOCK_EXCLUSION_GROUPS_2,
-  MOCK_EXCLUSION_GROUPS_2_RESULT,
+  MOCK_RULES_0,
+  MOCK_RULES_1,
+  MOCK_RULES_2,
+  RESULT_0,
+  RESULT_1,
+  RESULT_2,
 };

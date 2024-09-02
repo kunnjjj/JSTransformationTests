@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"jest src/__tests__/filterRedundantConditions/filterRedundantConditions.spec.js"
+    "test":"jest src/__tests__/filterRedundantRules/filterRedundantRules.spec.js"
   },
   "author": "",
   "license": "ISC",

@@ -30,9 +30,6 @@ describe("filterRedundantRules", () => {
 
   test("test-4", () => {
     // Input & Input Reference should not change (function purity)
-    const referenceBefore0 = MOCK_RULES_0,
-      referenceBefore1 = MOCK_RULES_1,
-      referenceBefore2 = MOCK_RULES_2;
 
     const clonedRules0 = [...MOCK_RULES_0];
     const clonedRules1 = [...MOCK_RULES_1];
@@ -45,11 +42,6 @@ describe("filterRedundantRules", () => {
     filterRedundantRules({ rules: MOCK_RULES_0 });
     filterRedundantRules({ rules: MOCK_RULES_1 });
     filterRedundantRules({ rules: MOCK_RULES_2 });
-
-    // Input Reference
-    expect(MOCK_RULES_0).toBe(referenceBefore0);
-    expect(MOCK_RULES_1).toBe(referenceBefore1);
-    expect(MOCK_RULES_2).toBe(referenceBefore2);
 
     // Input Values
     expect(MOCK_RULES_0).toEqual(deepClone0);
